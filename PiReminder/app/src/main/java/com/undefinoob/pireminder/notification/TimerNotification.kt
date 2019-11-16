@@ -22,24 +22,14 @@ class TimerNotification(private val context: Context) {
 
         createNotificationChannel()
 
-        // Pending Intent redirecting to PI app
-        val launchPendingIntent = PIAppManager.getOpenPendingIntent(context)
-
-        // Pending intent resetting the timer
-        val resetIntent = Intent(context, TimerResetReceiver::class.java)
-        val resetPendingIntent = PendingIntent.getBroadcast(context, 1, resetIntent, 0)
-
-        // Pending intent Opening this app when notification is tapped
-        val openThisIntent = Intent(context, MainActivity::class.java)
-        val openThisPendingIntent = PendingIntent.getActivity(context, 0, openThisIntent, 0)
+        val tappedIntent = Intent(context, NotificationTappedReceiver::class.java)
+        val tappedPendingIntent = PendingIntent.getBroadcast(context, 0 , tappedIntent,0)
 
         builder = NotificationCompat.Builder(context, channelName)
             .setSmallIcon(R.drawable.ic_stat_mine)
             .setContentTitle("PI TIME")
             .setContentText("Time to mine!")
-            .addAction(R.drawable.ic_stat_mine, context.getString(R.string.go_to_pi), launchPendingIntent)
-            .addAction(R.drawable.ic_stat_reset_alarm, context.getString(R.string.reset_alarm), resetPendingIntent)
-            .setContentIntent(openThisPendingIntent)
+            .setContentIntent(tappedPendingIntent)
             .setAutoCancel(true)
     }
 

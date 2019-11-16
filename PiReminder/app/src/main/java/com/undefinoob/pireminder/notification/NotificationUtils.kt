@@ -26,12 +26,15 @@ class NotificationUtils {
             )
         }
 
-        fun setAlarm(context: Context) {
+        fun setAlarm(context: Context, time: Long = 0) {
             val alarmManager = context.getSystemService(Activity.ALARM_SERVICE) as AlarmManager
             val pendingIntent = createPendingIntent(context)
 
             val calendar = Calendar.getInstance()
-            calendar.timeInMillis += oneDayAsMillisec
+            if(time == 0L)
+                calendar.timeInMillis += oneDayAsMillisec
+            else
+                calendar.timeInMillis = time
 
             alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
             FileManager.writeTime(calendar, context)
