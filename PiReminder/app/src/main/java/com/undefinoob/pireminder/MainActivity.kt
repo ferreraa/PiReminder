@@ -1,6 +1,7 @@
 package com.undefinoob.pireminder
 
 import android.annotation.SuppressLint
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -21,7 +22,13 @@ class MainActivity : AppCompatActivity() {
 
         val notifier = findViewById<Button>(R.id.alarm)
         notifier.setOnClickListener{
-            NotificationUtils.setAlarm(this)
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                val dialog = TimePickerManager(this)
+                dialog.timePickedCallback = { updateView()}
+                dialog.show()
+            } else {
+                NotificationUtils.setAlarm(this)
+            }
             updateView()
         }
 
