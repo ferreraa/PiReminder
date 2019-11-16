@@ -23,7 +23,7 @@ class TimePickerManager(val context: Context) {
             timePicked.set(Calendar.HOUR_OF_DAY, hourOfDay)
             timePicked.set(Calendar.MINUTE, minutes)
             timePicked.set(Calendar.SECOND, 0)
-            val timeDiff = now.timeInMillis - timePicked.timeInMillis
+            val timeDiff =  timePicked.timeInMillis - now.timeInMillis
             if(timeDiff < 180_000L)
                 timePicked.timeInMillis += 86400000L
 
