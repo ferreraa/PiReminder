@@ -2,6 +2,10 @@ package com.undefinoob.pireminder.notification;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.os.PowerManager;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
@@ -15,6 +19,19 @@ public class TimerService extends JobIntentService {
 
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
+        PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+                        | PowerManager.ACQUIRE_CAUSES_WAKEUP, "PiReminder:wakeup");
+        wl.acquire();
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createWaveform(
+                   new long[]{200L,500L,500L,500L,500L,1000L},
+                    new int[] {0,100,0,100,0,255},
+                    -1));
+        } //else, the vibration is handled within notification builder
         new TimerNotification(this).fireNotification();
+
+        wl.release();
     }
 }

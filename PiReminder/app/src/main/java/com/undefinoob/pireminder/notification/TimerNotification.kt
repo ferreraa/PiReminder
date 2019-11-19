@@ -5,16 +5,15 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.undefinoob.pireminder.MainActivity
-import com.undefinoob.pireminder.PIAppManager
 import com.undefinoob.pireminder.R
 
 
 class TimerNotification(private val context: Context) {
-    private val channelName = "TimerNotification"
+    private val channelName = "Remind to mine"
     private val builder : NotificationCompat.Builder
 
 
@@ -30,6 +29,8 @@ class TimerNotification(private val context: Context) {
             .setContentTitle("PI TIME")
             .setContentText("Time to mine!")
             .setContentIntent(tappedPendingIntent)
+            .setVibrate(longArrayOf(200,500,500,500,500,1000))
+            .setLights(Color.MAGENTA, 2000,2000)
             .setAutoCancel(true)
     }
 
