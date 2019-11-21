@@ -7,7 +7,6 @@ import com.undefinoob.pireminder.PIAppManager
 
 class NotificationTappedReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, p1: Intent?) {
-        println("hello")
         NotificationUtils.setAlarm(context)
         PIAppManager.openPIApp(context)
     }

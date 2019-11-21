@@ -12,8 +12,6 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -22,7 +20,9 @@ class MainActivity : AppCompatActivity() {
 
         val notifier = findViewById<Button>(R.id.alarm)
         notifier.setOnClickListener{
+
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                //NotificationUtils.setAlarm(this, Calendar.getInstance().timeInMillis + 5000)
                 val dialog = TimePickerManager(this)
                 dialog.timePickedCallback = { updateView()}
                 dialog.show()
