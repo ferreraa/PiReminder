@@ -3,6 +3,7 @@ package com.undefinoob.pireminder
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 
 class PIAppManager {
 
@@ -16,7 +17,10 @@ class PIAppManager {
         }
 
         fun openPIApp(context: Context) {
-            context.startActivity(getLaunchIntent(context))
+            if(isPIInstalled(context))
+                context.startActivity(getLaunchIntent(context))
+            else
+                Toast.makeText(context, "PI is not installed", Toast.LENGTH_SHORT).show();
         }
 
         fun isPIInstalled(context: Context) : Boolean {
