@@ -19,10 +19,7 @@ public class TimerService extends JobIntentService {
 
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
-        PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
-                        | PowerManager.ACQUIRE_CAUSES_WAKEUP, "PiReminder:wakeup");
-        wl.acquire();
+
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             v.vibrate(VibrationEffect.createWaveform(
@@ -31,7 +28,5 @@ public class TimerService extends JobIntentService {
                     -1));
         } //else, the vibration is handled within notification builder
         new TimerNotification(this).fireNotification();
-
-        wl.release();
     }
 }
