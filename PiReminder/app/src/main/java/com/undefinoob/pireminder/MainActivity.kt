@@ -38,6 +38,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateView()
+    }
+
     @SuppressLint("SimpleDateFormat")
     private fun updateView() {
         val text = findViewById<TextView>(R.id.alarm_date)
