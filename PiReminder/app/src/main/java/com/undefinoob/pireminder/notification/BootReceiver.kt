@@ -7,11 +7,9 @@ import com.undefinoob.pireminder.FileManager
 
 class BootReceiver : BroadcastReceiver()  {
     override fun onReceive(context: Context, intent: Intent) {
-        when(intent.action) {
-            Intent.ACTION_BOOT_COMPLETED -> {
-                val time = FileManager.readTime(context)
-                NotificationUtils.setAlarm(context, time)
-            }
+        if(intent.action == Intent.ACTION_BOOT_COMPLETED) {
+            val time = FileManager.readTime(context)
+            NotificationUtils.setAlarm(context, time)
         }
     }
 }
