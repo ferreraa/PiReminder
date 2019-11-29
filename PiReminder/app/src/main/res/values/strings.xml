@@ -1,11 +1,5 @@
 <resources>
     <string name="app_name">PiReminder</string>
 
-    <string name="example_notification_title_template">Example: %1$s</string>
 
-
-    <string name="action_share">Share</string>
-    <string name="action_reply">Reply</string>
-    <string name="go_to_pi">Go to PI App</string>
-    <string name="reset_alarm">RESET ALARM</string>
 </resources>
