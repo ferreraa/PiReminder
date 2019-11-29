@@ -32,11 +32,9 @@ class MainActivity : AppCompatActivity() {
             updateView()
         }
 
-        if(PIAppManager.isPIInstalled(this)) {
-            val openPI = findViewById<Button>(R.id.button_open_pi)
-            openPI.setOnClickListener {
-                PIAppManager.openPIApp(this)
-            }
+        val openPI = findViewById<Button>(R.id.button_open_pi)
+        openPI.setOnClickListener {
+            PIAppManager.openPIApp(this)
         }
     }
 
