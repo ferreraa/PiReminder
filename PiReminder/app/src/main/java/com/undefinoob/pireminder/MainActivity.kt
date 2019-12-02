@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.undefinoob.pireminder.notification.NotificationUtils
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,7 +22,11 @@ class MainActivity : AppCompatActivity() {
 
         val notifier = findViewById<Button>(R.id.alarm)
         notifier.setOnClickListener{
-
+            try {
+                Log.d("logFileContent: \n", FileManager.readLogs(this))
+            } catch (exception: Exception) {
+                //doesn't matter
+            }
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //NotificationUtils.setAlarm(this, Calendar.getInstance().timeInMillis + 5000)
                 val dialog = TimePickerManager(this)
